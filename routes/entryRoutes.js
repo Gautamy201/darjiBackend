@@ -3,7 +3,7 @@ const router = express.Router()
 
 const {createEntry} = require("../controllers/entryController")
 
-router.post("/creteEntry",createEntry)
+router.post("/",createEntry)
 
 
 

@@ -2,7 +2,6 @@ const mongoose = require("mongoose")
 
 const entrySchema = new mongoose.Schema(
     {
-        date:Date,
         partyName:String,
         vehicleNo:String,
         driverName:String,
