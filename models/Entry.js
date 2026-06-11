@@ -2,6 +2,9 @@ const mongoose = require("mongoose")
 
 const entrySchema = new mongoose.Schema(
     {
+        entryDate:{
+            type:Date
+        },
         partyName:String,
         vehicleNo:String,
         driverName:String,

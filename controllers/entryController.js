@@ -3,6 +3,7 @@ const Entry = require("../models/Entry")
 const createEntry = async (req,res)=>{
     console.log("working")
     const {
+        entryDate,
         partyName,
         vehicleNo,
         driverName,
@@ -14,7 +15,8 @@ const createEntry = async (req,res)=>{
         engineerName,
     } = req.body;
 
-    const entry = await entry.create({
+    const entry = await Entry.create({
+        entryDate,
         partyName,
         vehicleNo,
         driverName,
@@ -26,7 +28,55 @@ const createEntry = async (req,res)=>{
         engineerName,
     })
 
-    res.status(201).json(entry)
+    res.status(201).json({
+        success:true,
+        message:"Entry Created Successfully",
+        data:entry
+    })
+    console.log(req.body)
 }
 
-module.exports = {createEntry}
+// gate entries api -------------
+
+    const getEntries = async (req,res)=>{
+        try{
+            const entries = await Entry.find();
+
+            res.status(200).json({
+                success:true,
+                count:entries.length,
+                data:entries
+            })
+        } catch(error){
+            res.status(500).json({
+                success:false,
+                message:error.message
+            })
+        }
+    }
+
+// get letest 5 entries router
+
+const getLatestEntries = async(req,res)=>{
+    try{
+        const entries = await Entry.find().sort({createdAt:-1}).limit(5);
+
+        res.status(200).json({
+            success:true,
+            data:entries
+        })
+    } catch(error){
+        res.status(500).json({
+            success:false,
+            message:error.message
+        })
+    }
+
+}
+
+
+
+
+
+
+module.exports = {createEntry,getEntries,getLatestEntries}
