@@ -1,3 +1,4 @@
+
 const Entry = require("../models/Entry")
 
 const createEntry = async (req,res)=>{
@@ -75,8 +76,55 @@ const getLatestEntries = async(req,res)=>{
 }
 
 
+// get data by id
+
+const getEntryDataById = async (req,res) =>{
+    try{
+        const entry = await Entry.findById(req.params.id)
+        if(!entry){
+            return res.status(404).json({
+                message:"entry not avillable"
+            })
+        }
+        res.status(200).json({
+            success:true,
+            data:entry
+        })
+    }catch(error){
+        res.status(500).json({
+            success:false,
+            message:error.message
+        })
+    }
+}
+
+
+// delet entry 
+
+const deletEntry = async(req,res)=>{
+    try{
+        const data = await Entry.findByIdAndDelete(req.params.id)
+        if(!data){
+            return res.status(404).json({
+                success:false,
+                message:"Data not found"
+            })
+        }
+        res.status(200).json({
+            success:true,
+            message :"Entry deleted successfuly",
+            data
+        })
+    }catch(error){
+        res.status(500).json({
+            success:false,
+            message:error.message
+        })
+    }
+}
 
 
 
 
-module.exports = {createEntry,getEntries,getLatestEntries}
+
+module.exports = {createEntry,getEntries,getLatestEntries,getEntryDataById,deletEntry}
