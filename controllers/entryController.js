@@ -150,7 +150,7 @@ const getReport = async(req,res)=>{
 
         worksheet.columns = [
             { header:"Date",key:"entryDate",width:15},
-            { header:"Party Name",key:"partyName",width:30},
+            { header:"Party Name",key:"partyName",width:35},
             { header:"Vehicle No",key:"vehicleNo",width:20},
             { header:"Driver Name",key:"driverName",width:25},
             { header:"Driver Contact No",key:"driverContactNo",width:25},
