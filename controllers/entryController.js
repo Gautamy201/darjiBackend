@@ -181,6 +181,7 @@ const getReport = async(req,res)=>{
             worksheet.addRow({
                 entryDate:item.entryDate ? item.entryDate.toLocaleDateString("en-IN") : "",
                 partyName:item.partyName,
+                vehicleNo:item.vehicleNo,
                 driverName:item.driverName,
                 driverContactNo:item.driverContactNo,
                 cameraForTsl:item.cameraForTsl,
