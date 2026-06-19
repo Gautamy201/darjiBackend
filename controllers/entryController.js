@@ -214,7 +214,8 @@ const getReport = async(req,res)=>{
         res.status(500).json({
             success:false,
             message:"Report download Failed",
-            err:error
+            err:error.message,
+            stack:error.stack
         })
     }
 }
