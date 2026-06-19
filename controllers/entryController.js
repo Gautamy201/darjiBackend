@@ -140,7 +140,7 @@ const getReport = async(req,res)=>{
 
         const entries = await Entry.find({
             entryDate : {
-                $get: startDate,
+                $gte: startDate,
                 $lt: endDate,
             }
         })
