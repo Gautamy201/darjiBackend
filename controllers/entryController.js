@@ -145,71 +145,10 @@ const getReport = async(req,res)=>{
             }
         })
 
-        const workbook = new ExcelJS.Workbook();
-        const worksheet = workbook.addWorksheet("Entries")
-
-        worksheet.columns = [
-            { header:"Date",key:"entryDate",width:15},
-            { header:"Party Name",key:"partyName",width:35},
-            { header:"Vehicle No",key:"vehicleNo",width:20},
-            { header:"Driver Name",key:"driverName",width:25},
-            { header:"Driver Contact No",key:"driverContactNo",width:25},
-            { header:"Camera For TSL",key:"cameraForTsl",width:20},
-            { header:"PO Number",key:"poNumber",width:25},
-            { header:"Invoice Number",key:"invoiceNumber",width:25},
-            { header:"Plant Name",key:"plantName",width:20},
-            { header:"Engineer Name",key:"engineerName",width:25},
-        ]
-
-        worksheet.getRow(1).font = {
-            bold:true,
-            color: {argb:"000000"},
-            size:12,
-        };
-
-        worksheet.getRow(1).fill = {
-            type:"pattern",
-            pattern:"solid",
-            fgColor: {argb:"FFFF00"},
-        };
-        worksheet.getRow(1).alignment = {
-            vertical:"middle",
-            horizontal:"center",
-        };
-
-        entries.forEach((item)=>{
-            worksheet.addRow({
-                entryDate:item.entryDate ? item.entryDate.toLocaleDateString("en-IN") : "",
-                partyName:item.partyName,
-                vehicleNo:item.vehicleNo,
-                driverName:item.driverName,
-                driverContactNo:item.driverContactNo,
-                cameraForTsl:item.cameraForTsl,
-                poNumber:item.poNumber,
-                invoiceNumber:item.invoiceNumber,
-                plantName:item.plantName,
-                engineerName:item.engineerName,
-            })
+        res.status(200).json({
+            success:true,
+            data:entries
         })
-
-        worksheet.eachRow((row)=>{
-            row.eachCell((cell)=>{
-                cell.border = {
-                top: {style: "thin"},
-                left: {style: "thin"},
-                right: {style: "thin"},
-                bottom: {style: "thin"},
-            }
-            })
-        })
-
-        res.setHeader(
-            "Content-Disposition",
-            `attachment; fileName=Entries-${month}-${year}.xlsx`
-        )
-
-        await workbook.xlsx.write(res);
-        res.end()
 
     }catch(error){
         res.status(500).json({
