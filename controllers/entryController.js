@@ -145,6 +145,13 @@ const getReport = async(req,res)=>{
             }
         })
 
+        if(entries.length===0){
+            return res.status(400).json({
+                success:false,
+                message:`No data availabe for ${month}-${year}`
+            })
+        }
+
         res.status(200).json({
             success:true,
             data:entries
