@@ -184,17 +184,6 @@ const updateEntry = async (req, res) => {
       message: error.message,
     });
   }
-
-  //     entry.entryDate = req.body.entryDate
-  //     entry.partyName = req.body.partyName
-  //     entry.vehicleNo = req.body.vehicleNo
-  //     entry.driverName = req.body.driverName
-  //     entry.driverContactNo = req.body.driverContactNo
-  //     entry.cameraForTsl = req.body.cameraForTsl
-  //     entry.poNumber = req.body.poNumber
-  //     entry.invoiceNumber = req.body.invoiceNumber
-  //     entry.plantName = req.body.plantName
-  //     entry.engineerName = req.body.engineerName
 };
 
 module.exports = {
